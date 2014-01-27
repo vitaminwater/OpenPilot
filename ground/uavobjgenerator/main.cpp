@@ -35,6 +35,7 @@
 #include "generators/matlab/uavobjectgeneratormatlab.h"
 #include "generators/python/uavobjectgeneratorpython.h"
 #include "generators/wireshark/uavobjectgeneratorwireshark.h"
+#include "generators/api/uavobjectgeneratorapi.h"
 
 #define RETURN_ERR_USAGE 1
 #define RETURN_ERR_XML   2
@@ -55,6 +56,7 @@ void usage()
     cout << "\t-python        build python code" << endl;
     cout << "\t-matlab        build matlab code" << endl;
     cout << "\t-wireshark     build wireshark plugin" << endl;
+    cout << "\t-api           build api code" << endl;
     cout << "\tIf no language is specified ( and not -none ) -> all are built." << endl;
     cout << "Misc: " << endl;
     cout << "\t-none          build no language - just parse xml's" << endl;
@@ -103,6 +105,7 @@ int main(int argc, char *argv[])
     }
 
     bool verbose       = (arguments_stringlist.removeAll("-v") > 0);
+    bool do_api        = (arguments_stringlist.removeAll("-api") > 0);
     bool do_gcs        = (arguments_stringlist.removeAll("-gcs") > 0);
     bool do_flight     = (arguments_stringlist.removeAll("-flight") > 0);
     bool do_java       = (arguments_stringlist.removeAll("-java") > 0);
@@ -111,7 +114,7 @@ int main(int argc, char *argv[])
     bool do_wireshark  = (arguments_stringlist.removeAll("-wireshark") > 0);
     bool do_none       = (arguments_stringlist.removeAll("-none") > 0); //
 
-    bool do_all        = ((do_gcs || do_flight || do_java || do_python || do_matlab) == false);
+    bool do_all        = ((do_api || do_gcs || do_flight || do_java || do_python || do_matlab) == false);
     bool do_allObjects = true;
 
     if (arguments_stringlist.length() >= 2) {
@@ -214,6 +217,13 @@ int main(int argc, char *argv[])
         cout << "generating flight code" << endl;
         UAVObjectGeneratorFlight flightgen;
         flightgen.generate(parser, templatepath, outputpath);
+    }
+
+    // generate api code if wanted
+    if (do_api | do_all) {
+        cout << "generating api code" << endl;
+        UAVObjectGeneratorAPI apigen;
+        apigen.generate(parser, templatepath, outputpath);
     }
 
     // generate gcs code if wanted
