@@ -47,11 +47,10 @@ $(DATAFIELDS)
 
 class $(NAME): public UAVObject
 {
-private:
-	int instance;
-	DataFields$(NAME) dataFields;
 
 public:
+	int instance;
+	DataFields$(NAME) dataFields;
 	static int numInstances;
 
     // Field information

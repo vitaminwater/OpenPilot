@@ -27,12 +27,10 @@ int main() {
 	UAVObjManager* manager = new UAVObjManager(&us, &us, TELEMETRY_USBHID); //important to tell which type of telemetry is being used.
 	UAVObject* obj = new FlightStatus(manager);
 	UAVObject* obj2 = new GCSReceiver(manager);
-	UAVObject* obj3 = new ManualControlCommand(manager);
 
 	//Adds objects to the manager
 	manager->UAVObjRegister(obj);
 	manager->UAVObjRegister(obj2);
-	manager->UAVObjRegister(obj3);
 
 	//Update some fields on the UAVObject
 	//This specific object is used to control the CC3D with a computer instead of a radio controller
