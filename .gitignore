@@ -71,3 +71,9 @@ RemoteSystemsTempFiles
 *.rej
 *.orig
 *.diff~
+
+# Vim temp files
+
+.*.swp
+.*.swo
+.*.swn
