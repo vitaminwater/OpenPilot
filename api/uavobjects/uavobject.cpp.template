@@ -1,0 +1,151 @@
+/**
+ ******************************************************************************
+ *
+ * @file       $(NAMELC).cpp
+ * @author     The OpenPilot Team, http://www.openpilot.org Copyright (C) 2010.
+ * @see        The GNU Public License (GPL) Version 3
+ * @addtogroup GCSPlugins GCS Plugins
+ * @{
+ * @addtogroup UAVObjectsPlugin UAVObjects Plugin
+ * @{
+ *
+ * @note       Object definition file: $(XMLFILE).
+ *             This is an automatically generated file.
+ *             DO NOT modify manually.
+ *
+ * @brief      The UAVUObjects GCS plugin
+ *****************************************************************************/
+/*
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+ * for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+#include "$(NAMELC).h"
+
+int $(NAME)::numInstances = 0;
+
+/**
+ * Constructor
+ */
+$(NAME)::$(NAME)(UAVObjManager* manager): UAVObject(manager, $(OBJIDHEX), "$(NAME)", "$(DESCRIPTION)", "$(CATEGORY)", $(ISSINGLEINST), $(ISSETTINGS), $(FLIGHTACCESS), $(GCSACCESS), $(FLIGHTTELEM_ACKED), $(GCSTELEM_ACKED), $(FLIGHTTELEM_UPDATEMODE), $(GCSTELEM_UPDATEMODE), $(FLIGHTTELEM_UPDATEPERIOD), $(GCSTELEM_UPDATEPERIOD), $(LOGGING_UPDATEPERIOD))
+{
+
+}
+
+int $(NAME)::UAVObjSetDataField(const char *dataIn, const std::string fieldID){
+	$(SETDATAFIELD)
+	return 0;
+}
+
+int $(NAME)::UAVObjGetDataField(char *dataOut, const std::string fieldID){
+	$(GETDATAFIELD)
+	return 0;
+}
+
+int $(NAME)::UAVObjUnpack(const unsigned char *dataIn){
+	memcpy(&dataFields, dataIn, NUMBYTES);
+	return 0;
+}
+
+int $(NAME)::UAVObjPack(unsigned char *dataOut) {
+	memcpy(dataOut, &dataFields, NUMBYTES);
+	return 0;
+}
+
+unsigned short $(NAME)::UAVObjGetInstance() const {
+	return instance;
+}
+unsigned short $(NAME)::UAVObjGetNumBytes() const {
+	return sizeof(dataFields);
+}
+unsigned short $(NAME)::UAVObjGetNumInstances() const {
+	return numInstances;
+}
+
+std::string $(NAME)::prettyPrint() {
+	std::stringstream ss;
+	$(PRETTYPRINT)
+	return ss.str();
+}
+
+/*/***/
+/* * Initialize object fields with the default values.*/
+/* * If a default value is not specified the object fields*/
+/* * will be initialized to zero.*/
+/* */
+/*void $(NAME)::setDefaultFieldValues()*/
+/*{*/
+/*$(INITFIELDS)*/
+/*}*/
+
+/*/***/
+/* * Get the object data fields*/
+/* */
+/*$(NAME)::DataFields $(NAME)::getData()*/
+/*{*/
+/*    QMutexLocker locker(mutex);*/
+/*    return data;*/
+/*}*/
+
+/*/***/
+/* * Set the object data fields*/
+/* */
+/*void $(NAME)::setData(const DataFields& data)*/
+/*{*/
+/*    QMutexLocker locker(mutex);*/
+/*    // Get metadata*/
+/*    Metadata mdata = getMetadata();*/
+/*    // Update object if the access mode permits*/
+/*    if (UAVObject::GetGcsAccess(mdata) == ACCESS_READWRITE) {*/
+/*        this->data = data;*/
+/*        emit objectUpdatedAuto(this); // trigger object updated event*/
+/*        emit objectUpdated(this);*/
+/*    }*/
+/*}*/
+
+/*void $(NAME)::emitNotifications()*/
+/*{*/
+/*    $(NOTIFY_PROPERTIES_CHANGED)*/
+/*}*/
+
+/*/***/
+/* * Create a clone of this object, a new instance ID must be specified.*/
+/* * Do not use this function directly to create new instances, the*/
+/* * UAVObjectManager should be used instead.*/
+/* */
+/*UAVDataObject *$(NAME)::clone(unsigned int instID)*/
+/*{*/
+/*    $(NAME) *obj = new $(NAME)();*/
+/*    obj->initialize(instID, this->getMetaObject());*/
+/*    return obj;*/
+/*}*/
+
+/*/***/
+/* * Create a clone of this object only to be used to retrieve defaults*/
+/* */
+/*UAVDataObject *$(NAME)::dirtyClone()*/
+/*{*/
+/*    $(NAME) *obj = new $(NAME)();*/
+/*    return obj;*/
+/*}*/
+
+/*/***/
+/* * Static function to retrieve an instance of the object.*/
+/* */
+/*$(NAME) *$(NAME)::GetInstance(UAVObjectManager *objMngr, unsigned int instID)*/
+/*{*/
+/*    return dynamic_cast<$(NAME) *>(objMngr->getObject($(NAME)::OBJID, instID));*/
+/*}*/
+
+/*$(PROPERTIES_IMPL)*/
