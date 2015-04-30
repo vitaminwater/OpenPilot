@@ -1,3 +1,5 @@
+.vagrant
+#
 # Ignore artifacts of top-level Makefile
 /downloads
 /tools
