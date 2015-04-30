@@ -4,10 +4,10 @@ CFLAGS = -Wall -fpic -pthread -std=c++0x -c
 
 #Flags to compile the HIDAPI - library for communication with HID devices.
 CCC = gcc
-CCFLAGS = -Wall -fpic -pthread -I/usr/include/libusb-1.0 -lrt -c
+CCFLAGS = -Wall -fpic -pthread -I/usr/local/include/libusb-1.0 -lrt -c
 
 #Flags to create the UAVTalk library
-LIBFLAGS = -Wall -shared -I/usr/include/libusb-1.0 `pkg-config libusb-1.0 --cflags --libs` -o
+LIBFLAGS = -Wall -shared -I/usr/local/include/libusb-1.0 `pkg-config libusb-1.0 --cflags --libs` -o
 LIBUAVSO = libUAVTalk.so
 LIBUAV = UAVTalk
 
